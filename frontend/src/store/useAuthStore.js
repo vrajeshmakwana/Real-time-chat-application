@@ -78,6 +78,15 @@ export const useAuthStore = create((set, get) => ({
       set({ isUpdatingProfile: false });
     }
   },
+  updateUserDetails: async (data) => {
+    try {
+      const res = await axiosInstance.put("/auth/update-user-profile", data);
+      console.log(res.data);
+      toast.success("Profile Details Updated Successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
 
   connectSocket: () => {
     const { authUser } = get();

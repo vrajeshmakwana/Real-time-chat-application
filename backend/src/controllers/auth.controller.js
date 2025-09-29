@@ -104,6 +104,23 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+export const updateUserDetails = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { fullName, email } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { fullName: fullName, email: email },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);
