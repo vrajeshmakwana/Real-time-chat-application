@@ -72,9 +72,13 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.put("/auth/update-profile", data);
       set({ authUser: res.data });
-      toast.success("Profile updated Successfully");
+      toast.success("Profile Picture updated Successfully");
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log(error);
+      // Providing condition
+      error.response
+        ? toast.error(error.response.data.message)
+        : toast.error("Please Upload file under 10MB");
     } finally {
       set({ isUpdatingProfile: false });
     }
