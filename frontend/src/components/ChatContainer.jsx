@@ -79,7 +79,6 @@ const ChatContainer = () => {
           </div>
         ))}
       </div>
-      <p>messages...</p>
       <MessageInput />
     </div>
   );
